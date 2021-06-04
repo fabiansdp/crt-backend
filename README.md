@@ -5,7 +5,6 @@
 * [Kontributor](#kontributor)
 * [Penjelasan](#penjelasan)
 * [Spesifikasi](#spesifikasi)
-* [Daftar Kata Penting](#daftar-kata-penting)
 * [Cara Pengunaan](#cara_penggunaan)
 
 ## Kontributor
