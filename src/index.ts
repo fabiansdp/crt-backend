@@ -1,15 +1,14 @@
 import express from "express";
 import cors from "cors";
+import solver from "./solver";
 
 const app = express();
 const port = 8080; // default port to listen
 
 app.use(cors());
+app.use(express.json());
 
-// define a route handler for the default home page
-app.get( "/", ( req, res ) => {
-    res.send( "Hello world!" );
-} );
+app.use("/", solver);
 
 // start the Express server
 app.listen( port, () => {
