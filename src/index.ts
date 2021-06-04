@@ -3,7 +3,7 @@ import cors from "cors";
 import solver from "./solver";
 
 const app = express();
-const port = process.env.port || 8080; // default port to listen
+const port = process.env.PORT || 8080; // default port to listen
 
 app.use(cors());
 app.use(express.json());
