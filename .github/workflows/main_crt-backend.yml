@@ -34,6 +34,6 @@ jobs:
       with:
         app-name: crt-backend
         slot-name: Production
-        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_078073DA7D4043F6A79CF18AAB3D04F5 }}
+        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B7748A94856146B0AA57C96E4847B5C0 }}
         package: .
 
