@@ -26,4 +26,4 @@ Untuk penggunaan lokal:
 4. Pada repo frontend, buat file .env dan set variable REACT_APP_BACKEND bernilai http://localhost:8080 lalu npm run start.
 
 Link Website:
-https://crt-frontend.azurewebsites.net/
+https://crt-solver.netlify.app/
