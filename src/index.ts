@@ -11,6 +11,4 @@ app.use(express.json());
 app.use("/", solver);
 
 // start the Express server
-app.listen( port, () => {
-    console.log( `server started at port ${ port }` );
-} );
+app.listen(port);

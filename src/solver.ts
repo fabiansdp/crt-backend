@@ -4,22 +4,22 @@ const router = express.Router();
 
 interface FormData {
   rem : string;
-  mod : string; 
+  mod : string;
 };
 
 const inverse = (a : number, m : number) : number => {
-  let m0 = m;
+  const m0 = m;
   let x0 = 0;
   let x1 = 1;
 
-  if (m == 1)
+  if (m === 1)
   return 0;
 
   // Algoritma euclidean
   while (a > 1)
   {
       // q adalah hasil pembagian
-      let q = Math.floor(a/m);
+      const q = Math.floor(a/m);
 
       let t = m;
 
@@ -41,24 +41,35 @@ const inverse = (a : number, m : number) : number => {
   return x1;
 }
 
-const findX = (data : FormData[], length : number) : number => {
+const findProduct = (data : FormData[]) : number => {
   let product = 1;
 
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < data.length; i++) {
     product *= parseInt(data[i].mod);
   }
 
+  return product;
+}
+
+const findPP = (mod : number, product : number) : number => {
+  return product/mod;
+}
+
+const findResult = (
+  data : FormData[],
+  inverse : number[],
+  ppArr : number[]
+) : number => {
   let result = 0;
 
-  for (let i = 0; i < length; i++)
+  for (let i = 0; i < data.length; i++)
   {
-    const num = parseInt(data[i].mod);
-    const pp = product/num;
-    const inv = inverse(pp, num);
+    const pp = ppArr[i]
+    const inv = inverse[i];
     result += parseInt(data[i].rem) * inv * pp;
   }
 
-  return result % product;
+  return result;
 }
 
 router.get('/', (req, res) => {
@@ -66,8 +77,35 @@ router.get('/', (req, res) => {
 })
 
 router.post('/solve', (req, res) => {
-  const solution = findX(req.body, req.body.length);
-  res.status(200).send({solution : solution});
+  const data = req.body;
+  const length = data.length;
+  const product = findProduct(data);
+
+  const ppArr : number[] = [];
+  for (let i = 0; i < length; i++) {
+    const num = parseInt(data[i].mod);
+    const p = findPP(num, product);
+    ppArr.push(p);
+  }
+
+  const inverseArray : number[] = [];
+  for (let i = 0; i < length; i++) {
+    const num = parseInt(data[i].mod);
+    const inv = inverse(ppArr[i], num);
+    inverseArray.push(inv);
+  }
+
+  const result = findResult(data, inverseArray, ppArr);
+
+  const solution = result % product;
+
+  res.status(200).send({
+    solution,
+    product,
+    pp : ppArr,
+    inverse : inverseArray,
+    result
+  });
 })
 
 export = router;
